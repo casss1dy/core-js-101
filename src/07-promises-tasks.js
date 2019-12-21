@@ -28,8 +28,12 @@
  *      .catch((error) => console.log(error.message)) // 'Error: Wrong parameter is passed!
  *                                                    //  Ask her again.';
  */
-function willYouMarryMe(/* isPositiveAnswer */) {
-  throw new Error('Not implemented');
+function willYouMarryMe(isPositiveAnswer) {
+  return new Promise((resolve, reject) => {
+    if (typeof isPositiveAnswer !== 'boolean') reject(new Error('Wrong parameter is passed! Ask her again.'));
+    if (isPositiveAnswer) resolve('Hooray!!! She said "Yes"!');
+    resolve('Oh no, she said "No".');
+  });
 }
 
 
@@ -48,8 +52,8 @@ function willYouMarryMe(/* isPositiveAnswer */) {
  *    })
  *
  */
-function processAllPromises(/* array */) {
-  throw new Error('Not implemented');
+function processAllPromises(array) {
+  return Promise.all(array);
 }
 
 /**
@@ -71,8 +75,8 @@ function processAllPromises(/* array */) {
  *    })
  *
  */
-function getFastestPromise(/* array */) {
-  throw new Error('Not implemented');
+function getFastestPromise(array) {
+  return Promise.race(array);
 }
 
 /**
@@ -92,7 +96,25 @@ function getFastestPromise(/* array */) {
  *    });
  *
  */
-function chainPromises(/* array, action */) {
+function chainPromises() {
+  // обертка для обработки промиса
+  // function reflect(promise) {
+  //   // return promise.then((val) => ({ status: 'fulfilled', value: val }),
+  //   //   (error) => ({ status: 'rejected', reason: error }));
+  //
+  //   return promise.then((val) => ({ status: 'fulfilled', value: val }));
+  // }
+  //
+  // const results = Promise.all(array.map(reflect));
+  //
+  // results
+  //   .then((val) => {
+  // eslint-disable-next-line max-len
+  //     const x = val.reduce(action);
+  //     console.log(x);
+  //     return x;
+  //   });
+  // const successfulPromises = results.filter((p) => p.status === 'fulfilled');
   throw new Error('Not implemented');
 }
 
