@@ -115,7 +115,7 @@ function isTriangle(a, b, c) {
  *
  * @param {object} rect1
  * @param {object} rect2
- * @return {bool}
+ * @return {boolean}
  *
  * @example:
  *   { top: 0, left: 0, width: 10, height: 10 },
@@ -125,8 +125,10 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  if (rect1.left > rect2.left + rect2.width || rect2.left > rect1.width) return false;
+  if (rect1.top > rect2.top + rect2.height || rect2.top > rect1.top + rect1.height) return false;
+  return true;
 }
 
 
@@ -156,8 +158,9 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  const distance = (Math.sqrt((point.x - circle.center.x) ** 2 + (point.y - circle.center.y) ** 2));
+  return circle.radius > distance;
 }
 
 
@@ -332,8 +335,19 @@ function getDigitalRoot(n) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const config = ['[', ']', '(', ')', '{', '}', '<', '>'];
+  const stack = [];
+  // eslint-disable-next-line no-restricted-syntax
+  for (const sym of str) {
+    const symPos = config.indexOf(sym);
+
+    if (!(symPos % 2)) stack.push(sym);
+    else if (config.indexOf(stack[stack.length - 1]) === symPos - 1) stack.pop(sym);
+    else return false;
+  }
+
+  return !stack.length;
 }
 
 
@@ -357,8 +371,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -375,6 +389,14 @@ function toNaryString(/* num, n */) {
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
 function getCommonDirectoryPath(/* pathes */) {
+  // let template = pathes[0].split('/');
+  // for (part in template) {
+  //   let startTemp = start + template[part] || start;
+  //   for (key in pathes) {
+  //     if (pathes[key].startsWith(start))
+  //   }
+  //   let
+  // }
   throw new Error('Not implemented');
 }
 
@@ -398,6 +420,17 @@ function getCommonDirectoryPath(/* pathes */) {
  *
  */
 function getMatrixProduct(/* m1, m2 */) {
+  // const sum = Array(m2[0].length).fill([]);
+  // console.log(sum);
+  // for (let i = 0; i < m1.length; i += 1) {
+  //   console.log(i, m1);
+  //   console.log(i, m1[i]);
+  //   for (let j = 0; j < m2.length; j += 1) {
+  //     sum[i][j] = sum[i][j] || 0;
+  //     sum[i][j] += m1[i][j] * m2[j][i];
+  //   }
+  // }
+  // return sum;
   throw new Error('Not implemented');
 }
 
