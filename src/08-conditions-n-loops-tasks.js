@@ -388,16 +388,32 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  // let template = pathes[0].split('/');
-  // for (part in template) {
-  //   let startTemp = start + template[part] || start;
-  //   for (key in pathes) {
-  //     if (pathes[key].startsWith(start))
-  //   }
-  //   let
-  // }
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let temp = pathes[0];
+  const template = [];
+
+  do {
+    if (temp && temp.indexOf('/') === -1) {
+      template.push(temp);
+      break;
+    }
+
+    const pos = temp.indexOf('/');
+    const slice = temp.slice(0, pos + 1);
+    template.push(slice);
+    temp = temp.slice(pos + 1);
+  } while (true);
+
+  let start = '';
+  // eslint-disable-next-line guard-for-in,no-restricted-syntax
+  for (const partKey in template) {
+    // eslint-disable-next-line no-undef,no-restricted-syntax,guard-for-in
+    for (const key in pathes) {
+      if (!pathes[key].startsWith(start + template[partKey])) return start;
+    }
+    start += template[partKey];
+  }
+  return start;
 }
 
 
