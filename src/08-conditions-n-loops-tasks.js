@@ -402,6 +402,7 @@ function getCommonDirectoryPath(pathes) {
     const slice = temp.slice(0, pos + 1);
     template.push(slice);
     temp = temp.slice(pos + 1);
+    // eslint-disable-next-line no-constant-condition
   } while (true);
 
   let start = '';
